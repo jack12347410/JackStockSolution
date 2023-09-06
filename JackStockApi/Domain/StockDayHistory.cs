@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace JackStockApi.Domain
 {
-    internal class StockHistory
+    public class StockDayHistory
     {
         /// <summary>
         /// 證券ID

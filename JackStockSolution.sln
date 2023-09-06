@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{215C8345-6A2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{A94552E8-72D7-4D1E-861D-DDE71EB0D1A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JackStockApi", "JackStockApi\JackStockApi.csproj", "{D41FF079-0E33-4113-9A67-57701F1C90E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JackStockApi", "JackStockApi\JackStockApi.csproj", "{D41FF079-0E33-4113-9A67-57701F1C90E7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JackLib", "..\..\..\Lib\JackLib\JackLib.csproj", "{21713A1E-F762-4BE0-AA3B-347C21F68CD9}"
 EndProject

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JackStockApi.Domain
 {
-    internal class StockMarketType
+    public class StockMarketType
     {
         /// <summary>
         /// 證券上市別ID

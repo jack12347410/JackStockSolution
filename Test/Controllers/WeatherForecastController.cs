@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace JackStockApi.Controllers
+namespace Test.Controllers
 {
     [ApiController]
     [Route("[controller]")]

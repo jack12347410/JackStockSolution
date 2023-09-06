@@ -4,6 +4,7 @@ using JackStockApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JackStockApi.Migrations
 {
     [DbContext(typeof(StockContext))]
-    partial class StockContextModelSnapshot : ModelSnapshot
+    [Migration("20230906011828_StockDayHistory")]
+    partial class StockDayHistory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,7 +53,7 @@ namespace JackStockApi.Migrations
                     b.ToTable("Stock", (string)null);
                 });
 
-            modelBuilder.Entity("JackStockApi.Domain.StockDayHistory", b =>
+            modelBuilder.Entity("JackStockApi.Domain.StockHistory", b =>
                 {
                     b.Property<int>("StockId")
                         .HasColumnType("int");
@@ -84,7 +87,7 @@ namespace JackStockApi.Migrations
 
                     b.HasKey("StockId", "DateTime");
 
-                    b.ToTable("StockDayHistory", (string)null);
+                    b.ToTable("StockHistory", (string)null);
                 });
 
             modelBuilder.Entity("JackStockApi.Domain.StockMarketType", b =>
@@ -121,7 +124,7 @@ namespace JackStockApi.Migrations
                     b.Navigation("StockMarketType");
                 });
 
-            modelBuilder.Entity("JackStockApi.Domain.StockDayHistory", b =>
+            modelBuilder.Entity("JackStockApi.Domain.StockHistory", b =>
                 {
                     b.HasOne("JackStockApi.Domain.Stock", "Stock")
                         .WithMany("StockHistories")

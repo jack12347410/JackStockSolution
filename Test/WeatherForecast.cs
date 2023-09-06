@@ -1,4 +1,4 @@
-namespace JackStockApi
+namespace Test
 {
     public class WeatherForecast
     {

@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace JackStockApi.Data
 {
-    internal class StockContext : DbContext
+    public class StockContext : DbContext
     {
         public DbSet<Stock> Stock { get; set; }
-        public DbSet<StockHistory> StockHistory { get; set; }
+        public DbSet<StockDayHistory> StockDayHistory { get; set; }
         public DbSet<StockMarketType> StockMarketType { get; set; }
 
         public StockContext(DbContextOptions options): base(options) { }
@@ -56,9 +56,9 @@ namespace JackStockApi.Data
                 .HasMaxLength(10);
             });
 
-            modelBuilder.Entity<StockHistory>(x =>
+            modelBuilder.Entity<StockDayHistory>(x =>
             {
-                x.ToTable("StockHistory");
+                x.ToTable("StockDayHistory");
                 x.HasKey(c => new { c.StockId, c.DateTime });
 
                 x.HasOne(d => d.Stock)

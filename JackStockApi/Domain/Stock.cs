@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace JackStockApi.Domain
 {
-    internal class Stock
+    public class Stock
     {
         /// <summary>
         /// 證券ID
@@ -28,6 +28,6 @@ namespace JackStockApi.Domain
         public int StockMarketTypeId { get; set; }
 
         public virtual StockMarketType StockMarketType { get; set; }
-        public virtual ICollection<StockHistory> StockHistories { get; set; }
+        public virtual ICollection<StockDayHistory> StockHistories { get; set; }
     }
 }
