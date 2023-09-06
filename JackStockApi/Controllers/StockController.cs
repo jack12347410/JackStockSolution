@@ -10,26 +10,24 @@ namespace JackStockApi.Controllers
     [Route("v1/api/[controller]")]
     public class StockController : ControllerBase
     {
-        private readonly StockService _stockDayHistoryService;
-        public StockController(StockService stockDayHistoryService)
+        private readonly StockService _stockService;
+        public StockController(StockService stockService)
         {
-            _stockDayHistoryService = stockDayHistoryService;
+            _stockService = stockService;
+        }
+
+        [HttpPost("Stock")]
+        public async Task<IActionResult> InsertStock([FromBody] IEnumerable<StockDto> dtos)
+        {
+            var result = await _stockService.InsertBatchStockAsync(dtos);
+            return Ok(result);
         }
 
         [HttpPost("StockDayHis")]
-        public async Task<IActionResult> InsertStockDayHis([FromBody] StockDayHistoryDto dto)
-        {
-            var result = await _stockDayHistoryService.InsertAsync(dto);
-            return Ok(result);
-        }
-
-        [HttpPost("StockDayHis/List")]
         public async Task<IActionResult> InsertStockDayHisList([FromBody] IList<StockDayHistoryDto> dtos)
         {
-            var result = await _stockDayHistoryService.InsertAsync(dtos);
+            var result = await _stockService.InsertBatchStockDayHisAsync(dtos);
             return Ok(result);
         }
-
-        //public async Task<IActionResult> InsertStock([FromBody])
     }
 }

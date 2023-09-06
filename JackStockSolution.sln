@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JackStockApi", "JackStockAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JackLib", "..\..\..\Lib\JackLib\JackLib.csproj", "{21713A1E-F762-4BE0-AA3B-347C21F68CD9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "exe", "exe", "{213CB8F4-DCF4-44FD-AADB-E697E416EE06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JackStock", "JackStock\JackStock.csproj", "{76DB4105-FA23-43EA-953F-4BEC1F06A679}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,10 @@ Global
 		{21713A1E-F762-4BE0-AA3B-347C21F68CD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21713A1E-F762-4BE0-AA3B-347C21F68CD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21713A1E-F762-4BE0-AA3B-347C21F68CD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76DB4105-FA23-43EA-953F-4BEC1F06A679}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76DB4105-FA23-43EA-953F-4BEC1F06A679}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76DB4105-FA23-43EA-953F-4BEC1F06A679}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76DB4105-FA23-43EA-953F-4BEC1F06A679}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +40,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A94552E8-72D7-4D1E-861D-DDE71EB0D1A9} = {215C8345-6A27-48E1-A273-7F89A174BFED}
 		{D41FF079-0E33-4113-9A67-57701F1C90E7} = {A94552E8-72D7-4D1E-861D-DDE71EB0D1A9}
+		{213CB8F4-DCF4-44FD-AADB-E697E416EE06} = {215C8345-6A27-48E1-A273-7F89A174BFED}
+		{76DB4105-FA23-43EA-953F-4BEC1F06A679} = {213CB8F4-DCF4-44FD-AADB-E697E416EE06}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A9A22A3D-A982-4023-8196-E85EADC67AE0}

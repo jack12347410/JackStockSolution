@@ -16,20 +16,43 @@ namespace JackStockApi.Repositorys
             _context = context;
         }
 
-        //public Task<int> Get()
-        //{
-        //}
-
-        public Task<int> InsertAsync(StockDayHistoryDto dto)
+        #region Stock
+        public Task<int> InsertBatchStockAsync(IEnumerable<StockDto> dtos)
         {
-            //_context.Database.GetDbConnection();
+            var sql = @"IF NOT EXISTS (SELECT [StockId] FROM Stock 
+                                        WHERE [Code] = @Code)
+                        BEGIN
+                            INSERT INTO Stock
+		                        ([Name], [Code], [StockMarketTypeId])
+                            VALUES (@Name, @Code, @StockMarketTypeId)
+                        END";
 
+            var paras = new List<DynamicParameters>();
+            foreach (var d in dtos)
+            {
+                var param = new DynamicParameters();
+                param.Add("@Name", d.Name);
+                param.Add("@Code", d.Code);
+                param.Add("@StockMarketTypeId", d.StockMarketTypeId);
+
+                paras.Add(param);
+            }
+
+            return _context.Database.DapperTransactionAsync(sql, paras);
+        }
+        #endregion Stock
+
+
+        #region StockDayHistory
+
+        public Task<int> InsertStockDayHisAsync(StockDayHistoryDto dto)
+        {
             var item = new StockDayHistory();
             _context.StockDayHistory.Add(item).CurrentValues.SetValues(dto);
             return _context.SaveChangesAsync();
         }
 
-        public Task InsertBatchAsync(IEnumerable<StockDayHistoryDto> dtos)
+        public Task<int> InsertBatchStockDayHisAsync(IEnumerable<StockDayHistoryDto> dtos)
         {
             var sql = @"IF NOT EXISTS (SELECT [StockId] FROM StockDayHistory 
                                         WHERE [StockId] = @StockId 
@@ -62,5 +85,7 @@ namespace JackStockApi.Repositorys
 
             return _context.Database.DapperTransactionAsync(sql, paras);
         }
+
+        #endregion StockDayHistory
     }
 }

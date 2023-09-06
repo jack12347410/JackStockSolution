@@ -1,4 +1,5 @@
-﻿using JackStockApi.Data;
+﻿using JackLib;
+using JackStockApi.Data;
 using JackStockApi.Domain;
 using JackStockApi.Dtos;
 using JackStockApi.Repositorys;
@@ -14,14 +15,47 @@ namespace JackStockApi.Services
             _repo = repo;
         }
 
-        public Task<int> InsertAsync(StockDayHistoryDto dto)
+        public Task<int> InsertBatchStockDayHisAsync(IEnumerable<StockDayHistoryDto> dtos)
         {
-            return _repo.InsertAsync(dto);
+            //List<StockDayHistoryDto> dtos = new List<StockDayHistoryDto>();
+            //stockDayHistories.ForEach(x=>
+            //{
+            //    var data = new StockDayHistoryDto()
+            //    {
+            //        DateTime = x.DateTime,
+            //        StockId = x.StockId,
+            //        Change = x.Change,
+            //        ClosingPrice = x.ClosingPrice,
+            //        HighestPrice = x.HighestPrice,
+            //        LowestPrice = x.LowestPrice,
+            //        OpeningPrice = x.OpeningPrice,
+            //        TradeValue = x.TradeValue,
+            //        TradeVolumn = x.TradeVolumn,
+            //        Transaction = x.Transaction,
+            //    };
+
+            //    dtos.Add(data);
+            //});
+            return _repo.InsertBatchStockDayHisAsync(dtos);
         }
 
-        public Task<int> InsertAsync(IList<StockDayHistoryDto> dtos)
+
+        public Task<int> InsertBatchStockAsync(IEnumerable<StockDto> dtos)
         {
-            return _repo.InsertAsync(dtos);
+            //List<StockDto> dtos = new List<StockDto>();
+            //stocks.ForEach(x =>
+            //{
+            //    var data = new StockDto()
+            //    {
+            //        StockMarketTypeId = x.StockMarketTypeId,    
+            //        Code = x.Code,  
+            //        Name = x.Name,  
+            //    };
+
+            //    dtos.Add(data);
+            //});
+
+            return _repo.InsertBatchStockAsync(dtos);
         }
     }
 }
