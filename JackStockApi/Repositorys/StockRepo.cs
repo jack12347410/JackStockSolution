@@ -19,7 +19,7 @@ namespace JackStockApi.Repositorys
         #region Stock
         public Task<int> InsertBatchStockAsync(IEnumerable<StockDto> dtos)
         {
-            var sql = @"IF NOT EXISTS (SELECT [StockId] FROM Stock 
+            var sql = @"IF NOT EXISTS (SELECT [Id] FROM Stock 
                                         WHERE [Code] = @Code)
                         BEGIN
                             INSERT INTO Stock

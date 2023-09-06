@@ -16,7 +16,7 @@ namespace JackStockApi.Controllers
             _stockService = stockService;
         }
 
-        [HttpPost("Stock")]
+        [HttpPost]
         public async Task<IActionResult> InsertStock([FromBody] IEnumerable<StockDto> dtos)
         {
             var result = await _stockService.InsertBatchStockAsync(dtos);
