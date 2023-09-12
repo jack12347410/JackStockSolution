@@ -11,6 +11,12 @@ namespace JackStockApi.Data
                 context.StockMarketType.AddRange(GetDefaultStockMarketTypes());
                 await context.SaveChangesAsync();
             }
+
+            if (!context.Stock.Any())
+            {
+                context.Stock.AddRange(GetDefaultStocks(context));
+                await context.SaveChangesAsync();
+            }
         }
 
         public static IEnumerable<StockMarketType> GetDefaultStockMarketTypes()
@@ -22,16 +28,16 @@ namespace JackStockApi.Data
             };
         }
 
-        //public static IEnumerable<Stock> GetDefaultStocks(StockContext context)
-        //{
-        //    var tseId = context.StockMarketType.Where(x => x.Code.Equals("tse")).Select(x => x.Id).First();
-        //    var otcId = context.StockMarketType.Where(x => x.Code.Equals("otc")).Select(x => x.Id).First();
-        //    return new List<Stock>()
-        //    {
-        //        new Stock(){Name = "宏碁", Code = "2353", StockMarketTypeId = tseId},
-        //        new Stock(){Name = "台積電", Code = "2330", StockMarketTypeId = otcId}
-        //    };
-        //}
+        public static IEnumerable<Stock> GetDefaultStocks(StockContext context)
+        {
+            var tseId = context.StockMarketType.Where(x => x.Code.Equals("tse")).Select(x => x.Id).First();
+            var otcId = context.StockMarketType.Where(x => x.Code.Equals("otc")).Select(x => x.Id).First();
+            return new List<Stock>()
+            {
+                new Stock(){Name = "宏碁", Code = "2353", StockMarketTypeId = tseId},
+                new Stock(){Name = "台積電", Code = "2330", StockMarketTypeId = otcId}
+            };
+        }
 
         //public static IEnumerable<StockDayHistory> GetStockDayHistories(StockContext context)
         //{

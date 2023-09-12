@@ -17,6 +17,17 @@ namespace JackStockApi.Repositorys
         }
 
         #region Stock
+        public IQueryable<Stock> FindStocksByMarketTypeId(int? marketTypeId) 
+        {
+            var result = _context.Stock.AsQueryable();
+            if (marketTypeId.HasValue)
+            {
+                return result.Where(x => x.StockMarketTypeId == marketTypeId);
+            }
+
+            return result;
+        }
+
         public Task<int> InsertBatchStockAsync(IEnumerable<StockDto> dtos)
         {
             var sql = @"IF NOT EXISTS (SELECT [Id] FROM Stock 
@@ -61,7 +72,7 @@ namespace JackStockApi.Repositorys
                             INSERT INTO StockDayHistory
 		                        ([StockId],[DateTime],[TradeVolumn],[TradeValue],[OpeningPrice],[HighestPrice],
 		                        [LowestPrice],[ClosingPrice],[Change],[Transaction])
-                            VALUES (@StockId, @DataTime, @TradeVolumn, @TradeValue, @OpeningPrice, @HighestPrice,
+                            VALUES (@StockId, @DateTime, @TradeVolumn, @TradeValue, @OpeningPrice, @HighestPrice,
 		                        @LowestPrice, @ClosingPrice, @Change, @Transaction)
                         END";
 

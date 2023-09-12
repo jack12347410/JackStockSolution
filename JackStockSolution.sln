@@ -13,7 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JackLib", "..\..\..\Lib\Jac
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "exe", "exe", "{213CB8F4-DCF4-44FD-AADB-E697E416EE06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JackStock", "JackStock\JackStock.csproj", "{76DB4105-FA23-43EA-953F-4BEC1F06A679}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JackStock", "JackStock\JackStock.csproj", "{76DB4105-FA23-43EA-953F-4BEC1F06A679}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "方案項目", "方案項目", "{3592FCF6-1F51-4938-A483-05D01BDB3124}"
+	ProjectSection(SolutionItems) = preProject
+		.env = .env
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

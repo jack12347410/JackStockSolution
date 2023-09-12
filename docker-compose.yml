@@ -1,0 +1,33 @@
+networks:
+    backend:
+  
+services:
+    jackstock:
+        build:
+            context: .\JackStockApi
+            dockerfile: Dockerfile
+        image: jackstocksolution/jackstock
+        environment:
+            # - DatabaseServer=mssqlserver
+            # - DatabaseName=Stock
+            # - DatabaseUser=sa
+            # - DatabasePassword=aa123456..
+            - ConnectionStrings__StockDBConnection=Server=mssqlserver;Database=Stock;TrustServerCertificate=true;User=sa;Password=aa123456..
+        container_name: jackstockapi
+        ports:
+            - "8080:80"
+        networks:
+            - backend
+        depends_on:
+            - mssqlserver
+
+    mssqlserver:
+        image: "mcr.microsoft.com/mssql/server:2019-latest"
+        ports:
+            - "1445:1433"
+        container_name: jackstocksolutionmssqlcontainer
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=aa123456..
+        networks:
+            - backend

@@ -19,7 +19,6 @@ namespace JackStockApi
             // Add services to the container.
 
             builder.Services.AddControllers();
-
             builder.Services.AddDbContext<StockContext>(
                 options => options.UseSqlServer(builder.Configuration.GetConnectionString("StockDBConnection")));
             builder.Services.AddScoped<StockRepo>();
@@ -48,9 +47,13 @@ namespace JackStockApi
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+               
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c=>c.SwaggerEndpoint("/swagger/v1/swagger.json", "JackStockApi v1"));
+
+            app.UseRouting();
 
             app.UseAuthorization();
 
@@ -81,6 +84,23 @@ namespace JackStockApi
                     logger.LogError(ex, "An error occured while seeding the database");
                 }
             }
+        }
+
+        /// <summary>
+        /// 取得mssql 連線字串
+        /// </summary>
+        /// <returns></returns>
+        private string MssqlConnStr(WebApplicationBuilder builder)
+        {
+            string? server = builder.Configuration["DatabaseServer"];
+            string? database = builder.Configuration["DatabaseName"];
+            string? user = builder.Configuration["DatabaseUser"];
+            string? password = builder.Configuration["DatabasePassword"];
+            string? trust = builder.Configuration["TrustServerCertificate"];
+            string connectionString = string.Format("Server={0};Database={1};TrustServerCertificate={2};User={3};Password={4};", 
+                server, database, trust, user, password);
+
+            return connectionString;
         }
     }
 }

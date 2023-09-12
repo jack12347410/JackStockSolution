@@ -11,9 +11,23 @@ namespace JackStockApi.Controllers
     public class StockController : ControllerBase
     {
         private readonly StockService _stockService;
+
         public StockController(StockService stockService)
         {
             _stockService = stockService;
+        }
+
+        [HttpGet("Test")]
+        public string GetTest()
+        {
+            return "Test";
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetStocksByMarketTypeIdAsync(int? marketTypeId)
+        {
+            var result = await _stockService.FindStockByMarketTypeIdAsync(marketTypeId);
+            return Ok(result);
         }
 
         [HttpPost]
