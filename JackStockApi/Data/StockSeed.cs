@@ -35,7 +35,7 @@ namespace JackStockApi.Data
             return new List<Stock>()
             {
                 new Stock(){Name = "宏碁", Code = "2353", StockMarketTypeId = tseId},
-                new Stock(){Name = "台積電", Code = "2330", StockMarketTypeId = otcId}
+                new Stock(){Name = "台積電", Code = "2330", StockMarketTypeId = tseId}
             };
         }
 

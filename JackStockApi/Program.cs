@@ -19,10 +19,15 @@ namespace JackStockApi
             // Add services to the container.
 
             builder.Services.AddControllers();
+
             builder.Services.AddDbContext<StockContext>(
                 options => options.UseSqlServer(builder.Configuration.GetConnectionString("StockDBConnection")));
             builder.Services.AddScoped<StockRepo>();
             builder.Services.AddScoped<StockService>();
+            builder.Services.AddScoped<TwseRepo>();
+            builder.Services.AddScoped<TwseService>();
+
+            builder.Services.AddHttpClient();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

@@ -22,9 +22,9 @@
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
-      //"environmentVariables": {
-      //  "ASPNETCORE_URLS": "http://+:80"
-      //},
+      "environmentVariables": {
+        "ASPNETCORE_URLS": "http://+:80"
+      },
       "publishAllPorts": true
     }
   },

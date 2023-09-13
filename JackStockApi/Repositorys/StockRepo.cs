@@ -17,6 +17,21 @@ namespace JackStockApi.Repositorys
         }
 
         #region Stock
+        /// <summary>
+        /// 取得stock by code
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public async Task<Stock> FindSockByCodeAsync(string code)
+        {
+            return await _context.Stock.AsQueryable().Where(x=>x.Code.Equals(code)).FirstOrDefaultAsync();
+        }
+
+        /// <summary>
+        /// 取得stocks by marketType
+        /// </summary>
+        /// <param name="marketTypeId"></param>
+        /// <returns></returns>
         public IQueryable<Stock> FindStocksByMarketTypeId(int? marketTypeId) 
         {
             var result = _context.Stock.AsQueryable();

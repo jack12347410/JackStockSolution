@@ -23,6 +23,11 @@ namespace JackStockApi.Controllers
             return "Test";
         }
 
+        /// <summary>
+        /// 取得股票代號
+        /// </summary>
+        /// <param name="marketTypeId"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetStocksByMarketTypeIdAsync(int? marketTypeId)
         {
@@ -30,6 +35,11 @@ namespace JackStockApi.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// 新增股票代號
+        /// </summary>
+        /// <param name="dtos"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> InsertStock([FromBody] IEnumerable<StockDto> dtos)
         {
@@ -37,11 +47,18 @@ namespace JackStockApi.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// 新增股市歷史資料(每日)
+        /// </summary>
+        /// <param name="dtos"></param>
+        /// <returns></returns>
         [HttpPost("StockDayHis")]
         public async Task<IActionResult> InsertStockDayHisList([FromBody] IList<StockDayHistoryDto> dtos)
         {
             var result = await _stockService.InsertBatchStockDayHisAsync(dtos);
             return Ok(result);
         }
+
+        
     }
 }

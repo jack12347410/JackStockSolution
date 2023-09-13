@@ -15,7 +15,7 @@ services:
             - ConnectionStrings__StockDBConnection=Server=mssqlserver;Database=Stock;TrustServerCertificate=true;User=sa;Password=aa123456..
         container_name: jackstockapi
         ports:
-            - "8080:80"
+            - "5963:80"
         networks:
             - backend
         depends_on:
