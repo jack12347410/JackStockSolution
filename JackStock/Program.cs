@@ -9,31 +9,30 @@ namespace JackStock
     {
         static void Main(string[] args)
         {
-            string dateStr = "112/09/01";
-            Console.WriteLine(dateStr.RocToAd());
+            //Console.WriteLine(DateTime.Now.ToString("yyyyMMdd"));
 
-            string volumn = "123,123";
-            Console.WriteLine(Convert.ToInt32(volumn.Replace(",", "")));
+            //string dateStr = "112/09/01";
+            //Console.WriteLine(dateStr.RocToAd());
 
-            string a = "-0.20";
-            Console.WriteLine(Convert.ToDouble(a));
+            //string volumn = "123,123";
+            //Console.WriteLine(Convert.ToInt32(volumn.Replace(",", "")));
 
-
-            using (var http = new HttpClient())
-            {
-                Dictionary<string, string> param = new Dictionary<string, string>
-                {
-                    { "stockNo", "2353" },
-                    { "date", DateTime.Now.ToString() }
-                };
-                var b = http.GetByParamAnsyc<TwseStockDayResponeDto>("http://www.twse.com.tw/exchangeReport/STOCK_DAY", param);
-                b.Wait();
-            }
+            //string a = "-0.20";
+            //Console.WriteLine(Convert.ToDouble(a));
 
 
-            Console.ReadLine();
+            //using (var http = new HttpClient())
+            //{
+            //    Dictionary<string, string> param = new Dictionary<string, string>
+            //    {
+            //        { "stockNo", "2353" },
+            //        { "date", DateTime.Now.ToString() }
+            //    };
+            //    var b = http.GetByParamAnsyc<TwseStockDayResponeDto>("http://www.twse.com.tw/exchangeReport/STOCK_DAY", param);
+            //    b.Wait();
+            //}
 
-
+            //Console.ReadLine();
 
         }
     }

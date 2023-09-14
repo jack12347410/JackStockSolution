@@ -41,6 +41,6 @@
         /// <summary>
         /// 成交筆數
         /// </summary>
-        public int Transaction { get; set; }
+        public long Transaction { get; set; }
     }
 }

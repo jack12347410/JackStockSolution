@@ -9,29 +9,34 @@ namespace JackStockApi.Services
 {
     public class StockService
     {
-        private readonly StockRepo _repo;
+        private readonly StockRepo _stockRepo;
 
-        public StockService(StockRepo repo) 
+        public StockService(StockRepo stockRepo) 
         {
-            _repo = repo;
+            _stockRepo = stockRepo;
+        }
+
+        public async Task<Stock> FindStockByCodeAsync(string stockCode)
+        {
+            return await _stockRepo.FindSockByCodeAsync(stockCode);
         }
 
         public async Task<IList<Stock>> FindStockByMarketTypeIdAsync(int? marketTypeId)
         {
-            var result = _repo.FindStocksByMarketTypeId(marketTypeId);
+            var result = _stockRepo.FindStocksByMarketTypeId(marketTypeId);
 
             return await result.OrderBy(x => x.Code).ToListAsync();
         }
 
         public Task<int> InsertBatchStockDayHisAsync(IEnumerable<StockDayHistoryDto> dtos)
         {
-            return _repo.InsertBatchStockDayHisAsync(dtos);
+            return _stockRepo.InsertBatchStockDayHisAsync(dtos);
         }
 
 
         public Task<int> InsertBatchStockAsync(IEnumerable<StockDto> dtos)
         {
-            return _repo.InsertBatchStockAsync(dtos);
+            return _stockRepo.InsertBatchStockAsync(dtos);
         }
     }
 }

@@ -9,11 +9,11 @@ namespace JackStockApi.Repositorys
 {
     public class StockRepo
     {
-        private readonly StockContext _context;
+        private readonly StockContext _stockContext;
 
-        public StockRepo(StockContext context)
+        public StockRepo(StockContext stockContext)
         {
-            _context = context;
+            _stockContext = stockContext;
         }
 
         #region Stock
@@ -24,7 +24,7 @@ namespace JackStockApi.Repositorys
         /// <returns></returns>
         public async Task<Stock> FindSockByCodeAsync(string code)
         {
-            return await _context.Stock.AsQueryable().Where(x=>x.Code.Equals(code)).FirstOrDefaultAsync();
+            return await _stockContext.Stock.AsQueryable().Where(x=>x.Code.Equals(code)).FirstOrDefaultAsync();
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace JackStockApi.Repositorys
         /// <returns></returns>
         public IQueryable<Stock> FindStocksByMarketTypeId(int? marketTypeId) 
         {
-            var result = _context.Stock.AsQueryable();
+            var result = _stockContext.Stock.AsQueryable();
             if (marketTypeId.HasValue)
             {
                 return result.Where(x => x.StockMarketTypeId == marketTypeId);
@@ -64,7 +64,7 @@ namespace JackStockApi.Repositorys
                 paras.Add(param);
             }
 
-            return _context.Database.DapperTransactionAsync(sql, paras);
+            return _stockContext.Database.DapperTransactionAsync(sql, paras);
         }
         #endregion Stock
 
@@ -74,8 +74,8 @@ namespace JackStockApi.Repositorys
         public Task<int> InsertStockDayHisAsync(StockDayHistoryDto dto)
         {
             var item = new StockDayHistory();
-            _context.StockDayHistory.Add(item).CurrentValues.SetValues(dto);
-            return _context.SaveChangesAsync();
+            _stockContext.StockDayHistory.Add(item).CurrentValues.SetValues(dto);
+            return _stockContext.SaveChangesAsync();
         }
 
         public Task<int> InsertBatchStockDayHisAsync(IEnumerable<StockDayHistoryDto> dtos)
@@ -91,7 +91,7 @@ namespace JackStockApi.Repositorys
 		                        @LowestPrice, @ClosingPrice, @Change, @Transaction)
                         END";
 
-            var paras = new List<DynamicParameters>();
+            var paras = new List<DynamicParameters>(dtos.Count());
             foreach (var d in dtos)
             {
                 var param = new DynamicParameters();
@@ -109,7 +109,7 @@ namespace JackStockApi.Repositorys
                 paras.Add(param);
             }
 
-            return _context.Database.DapperTransactionAsync(sql, paras);
+            return _stockContext.Database.DapperTransactionAsync(sql, paras);
         }
 
         #endregion StockDayHistory

@@ -15,7 +15,6 @@ namespace JackStockApi.Repositorys
         {
             using(var http = _httpClientFactory.CreateClient())
             {
-               
                 return await http.GetByParamAnsyc<TwseStockDayResponeDto>(Str.TWSE_STOCK_DAY_URL, paras);
             }
         }

@@ -1,5 +1,6 @@
 ﻿using JackStockApi.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 
 namespace JackStockApi.Controllers
 {
@@ -8,23 +9,21 @@ namespace JackStockApi.Controllers
     public class TwseController: ControllerBase
     {
         private readonly TwseService _twseService;
-        private readonly StockService _stockService;
 
-        public TwseController(TwseService twseService, StockService stockService) 
+        public TwseController(TwseService twseService) 
         {
             _twseService = twseService;
-            _stockService = stockService;
         }
 
         /// <summary>
-        /// 自動新增股市歷史資料(每日)
+        /// 新增股市(日)歷史資料
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
-        public async Task<IActionResult> InsertStockDayHisByTwse(string stockCode)
+        [HttpGet("StockDayHis")]
+        public async Task<IActionResult> InsertStockDayHisByTwseAsync(string stockCode, string? date)
         {
-            var result = await _twseService.GetTwseStockDayAsync(stockCode);
-            return Ok(result);
+            var result = await _twseService.GetTwseStockDayAndInsertToDbAsync(stockCode, date);
+            return result == null? NotFound() : Ok(result);
         }
     }
 }

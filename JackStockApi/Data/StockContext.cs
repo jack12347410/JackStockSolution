@@ -40,6 +40,11 @@ namespace JackStockApi.Data
                 .WithMany(p => p.Stocks)
                 .HasForeignKey(d => d.StockMarketTypeId);
 
+                x.Property(c => c.LastUpdateDate)
+                .IsRequired()
+                .HasColumnType("date")
+                .HasDefaultValue(new DateTime(2010, 1, 1));
+
             });
 
             modelBuilder.Entity<StockMarketType>(x =>
