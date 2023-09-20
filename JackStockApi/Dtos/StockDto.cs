@@ -14,9 +14,5 @@
         /// 證券上市別
         /// </summary>
         public int StockMarketTypeId { get; set; }
-        /// <summary>
-        /// 最後更新日
-        /// </summary>
-        public DateTime LastUpdateDate { get; set; }
     }
 }

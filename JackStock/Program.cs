@@ -11,8 +11,15 @@ namespace JackStock
         {
             //Console.WriteLine(DateTime.Now.ToString("yyyyMMdd"));
 
-            //string dateStr = "112/09/01";
-            //Console.WriteLine(dateStr.RocToAd());
+            string dateStr = " 99/01/01";
+            Console.WriteLine(dateStr.RocToAd());
+
+            DateTime dateOnly = new DateTime(2022, 9, 30);
+            DateTime dateTime = DateTime.Now.Date;
+            Console.WriteLine(dateOnly);
+            Console.WriteLine(dateTime);
+            Console.WriteLine(dateOnly.AddDays(1));
+            Console.WriteLine(new DateOnly(2023, 4, 1).ToString("yyyyMMdd"));
 
             //string volumn = "123,123";
             //Console.WriteLine(Convert.ToInt32(volumn.Replace(",", "")));
@@ -32,7 +39,7 @@ namespace JackStock
             //    b.Wait();
             //}
 
-            //Console.ReadLine();
+            Console.ReadLine();
 
         }
     }

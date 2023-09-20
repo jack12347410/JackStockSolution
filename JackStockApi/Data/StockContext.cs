@@ -73,6 +73,21 @@ namespace JackStockApi.Data
                 x.Property(c => c.DateTime)
                 .HasColumnType("date");
 
+                x.Property(c => c.OpeningPrice)
+                .HasColumnType("decimal(18,2)");
+
+                x.Property(c => c.ClosingPrice)
+               .HasColumnType("decimal(18,2)");
+
+                x.Property(c => c.LowestPrice)
+               .HasColumnType("decimal(18,2)");
+
+                x.Property(c => c.HighestPrice)
+               .HasColumnType("decimal(18,2)");
+
+                x.Property(c => c.Change)
+               .HasColumnType("decimal(18,2)");
+
             });
         }
     }

@@ -17,13 +17,25 @@ namespace JackStockApi.Controllers
 
         /// <summary>
         /// 新增股市(日)歷史資料
-        /// </summary>
+        /// </summary
         /// <returns></returns>
         [HttpGet("StockDayHis")]
-        public async Task<IActionResult> InsertStockDayHisByTwseAsync(string stockCode, string? date)
+        public async Task<IActionResult> GetTwseStockDayAndInsertToDbAsync(string stockCode, string? date)
         {
             var result = await _twseService.GetTwseStockDayAndInsertToDbAsync(stockCode, date);
             return result == null? NotFound() : Ok(result);
         }
+
+        /// <summary>
+        /// 新增所有股號(日)歷史資料
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("StockDayHisAll")]
+        public async Task<IActionResult> InsertAllStockDayHisByTwseAsync()
+        {
+            await _twseService.GetTwseStockDayAllAndInsertToDbAsync();
+            return Ok();
+        }
+
     }
 }

@@ -16,7 +16,17 @@ namespace JackStockApi.Services
             _stockRepo = stockRepo;
         }
 
-        public async Task<Stock> FindStockByCodeAsync(string stockCode)
+        public async Task<IList<Stock>> FindStockAllAsync()
+        {
+            return await _stockRepo.FindStockAllAsync();
+        }
+
+        public async Task<Stock?> FindStockByIdAsync(int id)
+        {
+            return await _stockRepo.FindSockByIdAsync(id);
+        }
+
+        public async Task<Stock?> FindStockByCodeAsync(string stockCode)
         {
             return await _stockRepo.FindSockByCodeAsync(stockCode);
         }
@@ -28,15 +38,26 @@ namespace JackStockApi.Services
             return await result.OrderBy(x => x.Code).ToListAsync();
         }
 
-        public Task<int> InsertBatchStockDayHisAsync(IEnumerable<StockDayHistoryDto> dtos)
+        public async Task<int> InsertBatchStockDayHisAsync(IEnumerable<StockDayHistoryDto> dtos)
         {
-            return _stockRepo.InsertBatchStockDayHisAsync(dtos);
+            return await _stockRepo.InsertBatchStockDayHisAsync(dtos);
         }
 
-
-        public Task<int> InsertBatchStockAsync(IEnumerable<StockDto> dtos)
+        public async Task<int> InsertBatchStockAsync(IEnumerable<StockDto> dtos)
         {
-            return _stockRepo.InsertBatchStockAsync(dtos);
+            return await _stockRepo.InsertBatchStockAsync(dtos);
+        }
+
+        public async Task<int> UpdateStockLastUpdateDate(int stockId, DateTime newDate)
+        {
+            var update = await FindStockByIdAsync(stockId);
+            if(update != null)
+            {
+                update.LastUpdateDate = newDate;
+                return await _stockRepo.UpdateStockAsync(update);
+            }
+
+            return 0;
         }
     }
 }

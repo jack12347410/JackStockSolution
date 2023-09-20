@@ -17,12 +17,28 @@ namespace JackStockApi.Repositorys
         }
 
         #region Stock
+
+        public async Task<IList<Stock>> FindStockAllAsync()
+        {
+            return await _stockContext.Stock.AsQueryable().ToListAsync();
+        }
+
+        /// <summary>
+        /// 取得stock by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<Stock?> FindSockByIdAsync(int id)
+        {
+            return await _stockContext.Stock.AsQueryable().Where(x => x.Id == id).FirstOrDefaultAsync();
+        }
+
         /// <summary>
         /// 取得stock by code
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        public async Task<Stock> FindSockByCodeAsync(string code)
+        public async Task<Stock?> FindSockByCodeAsync(string code)
         {
             return await _stockContext.Stock.AsQueryable().Where(x=>x.Code.Equals(code)).FirstOrDefaultAsync();
         }
@@ -43,7 +59,7 @@ namespace JackStockApi.Repositorys
             return result;
         }
 
-        public Task<int> InsertBatchStockAsync(IEnumerable<StockDto> dtos)
+        public async Task<int> InsertBatchStockAsync(IEnumerable<StockDto> dtos)
         {
             var sql = @"IF NOT EXISTS (SELECT [Id] FROM Stock 
                                         WHERE [Code] = @Code)
@@ -64,21 +80,27 @@ namespace JackStockApi.Repositorys
                 paras.Add(param);
             }
 
-            return _stockContext.Database.DapperTransactionAsync(sql, paras);
+            return await _stockContext.Database.DapperTransactionAsync(sql, paras);
+        }
+
+        public async Task<int> UpdateStockAsync(Stock update)
+        {
+            _stockContext.Stock.Update(update);
+            return await _stockContext.SaveChangesAsync();
         }
         #endregion Stock
 
 
         #region StockDayHistory
 
-        public Task<int> InsertStockDayHisAsync(StockDayHistoryDto dto)
+        public async Task<int> InsertStockDayHisAsync(StockDayHistoryDto dto)
         {
             var item = new StockDayHistory();
             _stockContext.StockDayHistory.Add(item).CurrentValues.SetValues(dto);
-            return _stockContext.SaveChangesAsync();
+            return await _stockContext.SaveChangesAsync();
         }
 
-        public Task<int> InsertBatchStockDayHisAsync(IEnumerable<StockDayHistoryDto> dtos)
+        public async Task<int> InsertBatchStockDayHisAsync(IEnumerable<StockDayHistoryDto> dtos)
         {
             var sql = @"IF NOT EXISTS (SELECT [StockId] FROM StockDayHistory 
                                         WHERE [StockId] = @StockId 
@@ -89,6 +111,10 @@ namespace JackStockApi.Repositorys
 		                        [LowestPrice],[ClosingPrice],[Change],[Transaction])
                             VALUES (@StockId, @DateTime, @TradeVolumn, @TradeValue, @OpeningPrice, @HighestPrice,
 		                        @LowestPrice, @ClosingPrice, @Change, @Transaction)
+
+                            UPDATE STOCK
+                            SET [LastUpdateDate] = @DateTime
+                            WHERE [Id] = @StockId
                         END";
 
             var paras = new List<DynamicParameters>(dtos.Count());
@@ -109,7 +135,7 @@ namespace JackStockApi.Repositorys
                 paras.Add(param);
             }
 
-            return _stockContext.Database.DapperTransactionAsync(sql, paras);
+            return await _stockContext.Database.DapperTransactionAsync(sql, paras);
         }
 
         #endregion StockDayHistory

@@ -23,6 +23,20 @@ namespace JackStockApi.Controllers
             return "Test";
         }
 
+        [HttpGet("id/{id}")]
+        public async Task<IActionResult> GetStockByIdAsync(int id)
+        {
+            var result = await _stockService.FindStockByIdAsync(id);
+            return result == null ? NotFound() : Ok(result);
+        }
+
+        [HttpGet("code/{code}")]
+        public async Task<IActionResult> GetStockByCodeAsync(string code)
+        {
+            var result = await _stockService.FindStockByCodeAsync(code);
+            return result == null ? NotFound() : Ok(result);
+        }
+
         /// <summary>
         /// 取得股票代號
         /// </summary>
@@ -32,7 +46,7 @@ namespace JackStockApi.Controllers
         public async Task<IActionResult> GetStocksByMarketTypeIdAsync(int? marketTypeId)
         {
             var result = await _stockService.FindStockByMarketTypeIdAsync(marketTypeId);
-            return Ok(result);
+            return result == null ? NotFound() : Ok(result);
         }
 
         /// <summary>
